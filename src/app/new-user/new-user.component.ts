@@ -13,6 +13,7 @@ import { FirebaseService } from '../services/firebase.service';
 export class NewUserComponent implements OnInit {
 
   exampleForm: FormGroup;
+
   avatarLink: string = "https://www.loginradius.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png";
 
   validation_messages = {
@@ -39,6 +40,17 @@ export class NewUserComponent implements OnInit {
     ],
     'fecha': [
       { type: 'required', message: 'fecha  es requerido.' },
+    ],
+    'evento_logro': [
+      { type: 'required', message: 'Nombre de Evento  es requerido.' },
+    ]
+    ,
+    'fecha_logro': [
+      { type: 'required', message: 'Fecha de Evento es requerido.' },
+    ]
+    ,
+    'puesto_logro': [
+      { type: 'required', message: 'Puesto del logro es requerido.' },
     ]
   };
 
@@ -67,8 +79,14 @@ export class NewUserComponent implements OnInit {
       link: ['', Validators.required],
 
       categoria: ['', Validators.required],
-      fecha: ['', Validators.required]
+      fecha: ['', Validators.required],
+
+      evento_logro: ['', Validators.required],
+      fecha_logro: ['', Validators.required],
+      puesto_logro: ['', Validators.required],
     });
+
+
   }
 
   openDialog() {
@@ -94,12 +112,20 @@ export class NewUserComponent implements OnInit {
       age: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
       celular: new FormControl('', Validators.required),
-      nameproy: new FormControl('',),
-      descripcion: new FormControl('', ),
-      link: new FormControl('',),
-      categoria: new FormControl('',Validators.required),
-      fecha: new FormControl('',Validators.required),
+      nameproy: new FormControl(''),
+      descripcion: new FormControl(''),
+      link: new FormControl(''),
+      categoria: new FormControl('', Validators.required),
+      fecha: new FormControl('', Validators.required),
+
+      evento_logro: new FormControl('', Validators.required),
+      fecha_logro: new FormControl('', Validators.required),
+      puesto_logro: new FormControl('', Validators.required),
+
+
     });
+    
+
   }
 
   onSubmit(value) {

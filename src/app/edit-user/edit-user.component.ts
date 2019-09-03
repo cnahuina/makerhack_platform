@@ -40,6 +40,15 @@ export class EditUserComponent implements OnInit {
     ],
     'fecha': [
       { type: 'required', message: 'fecha  es requerido.' },
+    ],
+    'evento_logro': [
+      { type: 'required', message: 'Evento logro  es requerido.' },
+    ],
+    'fecha_logro': [
+      { type: 'required', message: 'Fecha logro  es requerido.' },
+    ],
+    'puesto_logro': [
+      { type: 'required', message: 'Puesto logro  es requerido.' },
     ]
  };
 
@@ -74,7 +83,11 @@ export class EditUserComponent implements OnInit {
       link: [this.item.link],
       descripcion: [this.item.descripcion],
       categoria: [this.item.categoria, Validators.required],
-      fecha: [this.item.fecha, Validators.required]
+      fecha: [this.item.fecha, Validators.required],
+
+      evento_logro: [this.item.evento_logro, Validators.required],
+      fecha_logro: [this.item.fecha_logro, Validators.required],
+      puesto_logro: [this.item.puesto_logro, Validators.required],
     });
   }
 
