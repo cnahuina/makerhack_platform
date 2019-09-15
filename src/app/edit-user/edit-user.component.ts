@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material';
 import { AvatarDialogComponent } from "../avatar-dialog/avatar-dialog.component";
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
+import * as jsPDF from 'jspdf';
+import * as html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,6 +14,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+  
+  titulo = 'Generar PDF con Angular JS 5';
+  imagen1 = 'assets/img/tc.jpg';
+  imagen2 = 'assets/img/pm.jpg';
+  imagen3 = 'assets/img/al.jpg';
 
   exampleForm: FormGroup;
   item: any;
@@ -50,7 +57,7 @@ export class EditUserComponent implements OnInit {
     'puesto_logro': [
       { type: 'required', message: 'Puesto logro  es requerido.' },
     ]
- };
+  };
 
   constructor(
     public firebaseService: FirebaseService,
@@ -98,37 +105,52 @@ export class EditUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.item.avatar = result.link;
       }
     });
   }
 
-  onSubmit(value){
+  onSubmit(value) {
     value.avatar = this.item.avatar;
     value.age = Number(value.age);
     this.firebaseService.updateUser(this.item.id, value)
-    .then(
-      res => {
-        this.router.navigate(['/home']);
-      }
-    )
+      .then(
+        res => {
+          this.router.navigate(['/home']);
+        }
+      )
   }
 
-  delete(){
+  delete() {
     this.firebaseService.deleteUser(this.item.id)
-    .then(
-      res => {
-        this.router.navigate(['/home']);
-      },
-      err => {
-        console.log(err);
-      }
-    )
+      .then(
+        res => {
+          this.router.navigate(['/home']);
+        },
+        err => {
+          console.log(err);
+        }
+      )
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['/home']);
   }
+  generarPDF() {
+    html2canvas(document.getElementById('contenido'), {
+      // Opciones
+      allowTaint: true,
+      useCORS: false,
+      // Calidad del PDF
+      scale: 1
+    }).then(function (canvas) {
+      var img = canvas.toDataURL("image/png");
+      var doc = new jsPDF();
+      doc.addImage(img, 'PNG', 7, 20, 195, 190);
+      doc.save('Makerhack-list.pdf');
+    });
+  }
 
+  
 }
