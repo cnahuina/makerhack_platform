@@ -29,7 +29,7 @@
     "html2canvas": "1.0.0-rc.1",
     "jspdf": "^1.5.3",
     "node-sass": "^4.11.0",
-    "npm": "^6.9.0",
+    "npm": "^6.13.4",
     "npm-watch": "^0.6.0",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.3.3",
